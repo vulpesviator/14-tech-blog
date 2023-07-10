@@ -11,12 +11,17 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ["name"],
         },
+        {
+          model: Comment,
+          attributes: ["comment_body"]
+        },
       ],
     });
 
     const blogPosts = postData.map((post) => post.get({ plain: true }));
 
     res.render('homepage', {
+      blogPosts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -33,6 +38,10 @@ router.get("/post/:id", withAuth, async (req, res) => {
           model: User,
           attributes: ["name"],
         },
+        {
+          model: Comment,
+          include: [User],
+        }
       ],
     });
 
@@ -59,6 +68,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
           model: Post,
           include: [User],
         },
+        {
+          model: Comment,
+        }
       ],
 
     });
@@ -99,6 +111,10 @@ router.get("/create/:id", async (req, res) => {
           model: User,
           attributes: ["name"]
         },
+        {
+          model: Comment,
+          include: [User],
+        }
       ],
     });
 
