@@ -1,32 +1,32 @@
 let blogPost = window.location.pathname.split("/");
 
 const editPost = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
+  const title = document.getElementById("titleInput").value;
+  const description = document.getElementById("bodyInput").value;
 
-    const commentBody = document.getElementById("editBtn").value.trim();
-
-    document.location.assign(`/create/${blogPost}`);
-};
-
-const deletePost = async (event) => {
-    event.preventDefault();
-    console.log(event.target);    
-
-    const response = await fetch(`/api/post/${blogPost}`, {
-        method: "DELETE",
+  if (title && description) {
+    const response = await fetch(`/api/blogPost/${blogPost}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        title,
+        description,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-
+    console.log(response);
     if (response.ok) {
-        document.location.assign('/dashboard');
+      document.location.assign("/dashboard");
     } else {
-        alert(response.statusText);
+      alert(response.statusText);
     }
+  }
 };
 
-document
-    .querySelector('#editBtn')
-    .addEventListener('submit', editPost);
+const editButton = document.querySelectorAll("#editBtn");
 
-document
-    .querySelector('#deleteBtn')
-    .addEventListener('submit', deletePost);
+for (let i = 0; i < editButton.length; i++) {
+  editButton[i].addEventListener("click", editPost);
+}
