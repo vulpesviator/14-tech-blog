@@ -3,7 +3,36 @@ const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/withauth");
 
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: Post,
+          include: [User],
+        },
+        {
+          model: Comment,
+          attributes: ["comment_body"]
+        }
+      ]
+    });
+
+    const users = userData.map((project) => project.get({ plain: true }));
+
+    res.render('homepage', {
+      users,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+/*
+router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
@@ -11,12 +40,17 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ["name"],
         },
+        {
+          model: Comment,
+          attributes: ["comment_body"]
+        },
       ],
     });
 
     const blogPosts = postData.map((post) => post.get({ plain: true }));
 
     res.render('homepage', {
+      blogPosts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -24,6 +58,7 @@ router.get('/', async (req, res) => {
   }
 
 });
+*/
 
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
@@ -33,6 +68,10 @@ router.get("/post/:id", withAuth, async (req, res) => {
           model: User,
           attributes: ["name"],
         },
+        {
+          model: Comment,
+          include: [User],
+        }
       ],
     });
 
@@ -59,6 +98,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
           model: Post,
           include: [User],
         },
+        {
+          model: Comment,
+        }
       ],
 
     });
@@ -99,6 +141,10 @@ router.get("/create/:id", async (req, res) => {
           model: User,
           attributes: ["name"]
         },
+        {
+          model: Comment,
+          include: [User],
+        }
       ],
     });
 
