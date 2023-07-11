@@ -2,11 +2,21 @@ const router = require('express').Router();
 const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/withauth");
 
+
 router.get('/', withAuth, async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+      include: [
+        {
+          model: Post,
+          include: [User],
+        },
+        {
+          model: Comment,
+          attributes: ["comment_body"]
+        }
+      ]
     });
 
     const users = userData.map((project) => project.get({ plain: true }));
@@ -20,8 +30,9 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+
 /*
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
