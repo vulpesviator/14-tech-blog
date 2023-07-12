@@ -41,7 +41,6 @@ router.get('/', async (req, res) => {
   };
 });
 
-//* Express route for adding a Comment to a post
 router.get("/post/:id", async (req, res) => {
 
   try {
@@ -91,7 +90,6 @@ router.get("/post/:id", async (req, res) => {
   };
 });
 
-//* Express route for user Login
 router.get('/login', (req, res) => {
   
   if (req.session.loggedIn) {

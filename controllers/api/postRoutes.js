@@ -15,12 +15,10 @@ router.post('/new', withAuth, async (req, res) => {
         res.redirect('/api/dashboard')
         } catch(err) {
             console.log(err);
-            // returns a Server error response
             res.status(500).json(err);
         };
-});// end route
+});
 
-//* this will UPDATE an existing post when given an ID
 router.post('/update/', withAuth, async (req, res) => {
 
     try {
