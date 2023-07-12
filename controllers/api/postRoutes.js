@@ -43,7 +43,7 @@ router.post('/update/', withAuth, async (req, res) => {
 });
 
 router.delete('/:id', withAuth, async (req, res) => {
-    console.log("\n", "\x1b[33m", "Triggered route to delete a Post in postRoutes", "\x1b[0m", "\n");
+
     try {
         const postData = await Post.destroy({
             where: {
