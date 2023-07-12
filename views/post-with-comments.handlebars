@@ -2,7 +2,6 @@
 {{!-- this is only rendered if the user is already logged in --}}
 {{#if logged_in}}
     <div class="card">
-        <h3 class="card-header"></h3>
         <form class="card-body comment-form" id="comment-form">
             <div class="form-group">
                 <input class="col-12" type="text" id="comment" id="comment-body" name="comment-body"
@@ -15,13 +14,13 @@
         </form>
     </div>
 {{/if}}
-{{!-- render the comments here --}}
+
 <div class="row justify-content-center">
     <div class="col-10">
         {{> comments post.comments}}
     </div>
 </div>
-{{!-- if user is logged in, then load the helper script to save comments --}}
+
 {{#if logged_in}}
     <script src="/js/comments.js"></script>
 {{/if}}

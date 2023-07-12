@@ -10,5 +10,5 @@ router.use('/dashboard', dashboardRoutes);
 router.use('/posts', postRoutes)
 router.use('/comments', commentRoutes);
 
-// export
+
 module.exports = router;
