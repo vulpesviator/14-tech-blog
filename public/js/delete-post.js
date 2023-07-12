@@ -1,23 +1,20 @@
-const deletePostHandler = async (event) => {
-    event.preventDefault();
-    console.log(event.target);
-  
-    let blogPost = window.location.pathname.split("/");
-    console.log(blogPost);
-  
-    const response = await fetch(`/api/blogPost/${blogPost}`, {
-      method: "DELETE",
-    });
-  
-    if (response.ok) {
-      document.location.assign(`/dashboard`);
-    } else {
+const deleteFormHandler = async (event) => {
+  event.preventDefault();
+  const id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
+  const response = await fetch(`/api/posts/${id}`, {
+      method: 'DELETE',
+      body: JSON.stringify({
+          post_id: id
+      }),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+  if (response.ok) {
+      document.location.replace('/api/dashboard/');
+  } else {
       alert(response.statusText);
-    }
-  };
-  
-  const deleteButton = document.querySelectorAll("#deleteBtn");
-  
-  for (let i = 0; i < deleteButton.length; i++) {
-    deleteButton[i].addEventListener("click", deletePostHandler);
   }
+};
+
+document.querySelector('.deleteBtn').addEventListener('click', deleteFormHandler);

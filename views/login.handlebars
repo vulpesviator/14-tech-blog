@@ -1,15 +1,25 @@
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-          {{> login-form }}
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-          {{> signup-form }}
-
+<div class="row justify-content-center">
+  <div class="col-md-3">
+    <div class="card my-3">
+      <div class="card-body">
+        <h3 class="card-title">Existing User Login</h3>
+        <form class="login-form">
+          <div class="mb-3">
+            <label for="email-login">Email:</label>
+            <input class="form-control" type="email" id="email-login" />
+          </div>
+          <div class="mb-3">
+            <label for="password-login">Password:</label>
+            <input class="form-control" type="password" id="password-login" />
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary" type="submit">login</button>
+            <a class="btn btn-primary" href="/signup" role="button">Not a Member? Click to Signup</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
-
+<script src="/js/login.js"></script>
