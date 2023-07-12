@@ -1,8 +1,11 @@
 <!-- Blog Posts -->
-<article class="row mb-5 justify-content-center">
-    <div class="col-12 mx-auto">
-        {{#each posts as |post|}}
+<div class="row justify-content-center">
+    <div class="col-11 mt-4">
+        <h1 class="shadow bg-secondary p-2 text-dark bg-opacity-10">Your Feed</h1>
+    </div>
+    <div class="col-12 col-md-11 col-xl-10 mt-3">
+        {{#each posts as |post| }}
             {{> full-post post}}
         {{/each}}
     </div>
-</article>
+</div>
