@@ -1,26 +1,27 @@
-<div class="container">
-    <div class="row">
-        <div class="card text-dark shadow mb-3 blogPost-main">
-            <div class="text-center mx-auto p-3">
-                <h2>{{title}}</h2>
-                <p>Created by {{user.name}} on {{format_date date_created}}</p>
-                <p>{{description}}</p>
-                <button class="btn btn-dark" id="editBtn">Edit</button>
-                <button class="btn btn-dark" id="deleteBtn">Delete</button>
-            </div>
+{{> full-post post}}
 
-            <div class="text-center">
-                <h3>Comments</h3>
-                {{#each comments as |comment| }}
-                    <div>
-                        <p>{{comment.comment_body}} by {{comment.user.name}} on {{format_date comment.date_created}}</p>
-                    </div>
-                {{/each}}
+{{#if logged_in}}
+    <div class="card">
+        <h3 class="card-header"></h3>
+        <form class="card-body comment-form" id="comment-form">
+            <div class="form-group">
+                <input class="col-12" type="text" id="comment" id="comment-body" name="comment-body"
+                    placeholder="Enter a comment..."></input>
             </div>
-        </div>
+            <div>
+                <button type="submit" class="btn btn-sm btn-primary mt-2" id="post-comment">
+                    Submit Comment <i class="fa fa-reply"></i></button>
+            </div>
+        </form>
+    </div>
+{{/if}}
+
+<div class="row justify-content-center">
+    <div class="col-10">
+        {{> comments post.comments}}
     </div>
 </div>
 
-{{> comment-form }}
-
-<script src="/js/posts.js"></script>
+{{#if logged_in}}
+    <script src="/js/comments.js"></script>
+{{/if}}

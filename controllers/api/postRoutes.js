@@ -2,27 +2,32 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/withauth');
 
-router.post("/", withAuth, async (req, res) => {
+router.post("/new", withAuth, async (req, res) => {
     try {
-        const newPost = await Post.create({
-            ...req.body,
+        const postData = await Post.create({
+            title: req.body.title,
+            post_content: req.body.post_content,
             user_id: req.session.user_id,
         });
 
-        res.status(200).json(newPost);
+        res.redirect('/api/dashboard')
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
     }
 });
 
-router.put("/:id", withAuth, async (req, res) => {
+router.post("/update/", withAuth, async (req, res) => {
     console.log(req.body);
 
     try {
-        const postData = await Post.update(req.body, {
+        const postData = await Post.update({
+            title: req.body.title,
+            post_content: req.body.post_content,
+        },
+        {
             where: {
-                id: req.params.id,
-            },
+                id: req.body.post_id
+            }
         });
 
         if (!postData) {
@@ -30,7 +35,7 @@ router.put("/:id", withAuth, async (req, res) => {
             return;
         }
 
-        res.status(200).json(postData);
+        res.redirect('/api/dashboard');
     } catch (err) {
         res.status(500).json(err);
     }

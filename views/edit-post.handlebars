@@ -20,5 +20,9 @@
 </div>
 <input type="hidden" id="txtField" value="{{post.post_content}}"/>
 
+<script>
+   var myText = document.getElementById("txtField").value;
+   document.getElementById("post_content").value = myText;
+</script>
+
 <script src="/js/delete-post.js"></script>
-<script src="/js/posts.js"></script>
