@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models')
+const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/withauth');
 
-router.get("/", withAuth, async (req, res) => {
 
+router.get("/", withAuth, async (req, res) => {
+	console.log("LOOOOOOK HEREREREE");
 	try {
     const postData = await Post.findAll({
 		where: {
@@ -31,7 +32,6 @@ router.get("/", withAuth, async (req, res) => {
 			},
 		],
 	});
-
     const posts = postData.map((data) => data.get({ plain: true }));
 			res.render("dashboard", {
 				posts,
@@ -39,9 +39,10 @@ router.get("/", withAuth, async (req, res) => {
 				logged_in: req.session.loggedIn,
 			});
 } catch (err) {
+	console.log(err);
     res.status(500).json(err);
 }
-});
+}); 
 
 router.get("/new", withAuth, (req, res) => {
 
@@ -86,7 +87,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
 		}
 
 		const post = postData.get({ plain: true });
-			res.render("editing-post", {
+			res.render("edit-post", {
 				post,
 				edit_id: req.params.id,
 				username: req.session.username,
