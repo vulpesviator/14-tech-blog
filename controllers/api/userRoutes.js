@@ -1,8 +1,9 @@
 const router = require('express').Router();
+/* imports the User model */
 const { User } = require('../../models');
 
+/* Route to create a New User */
 router.post('/', async (req, res) => {
-
   try {
     const dbUserData = await User.create({
       username: req.body.username,
@@ -22,8 +23,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+/* Route for an existing User to login */
 router.post('/login', async (req, res) => {
-  
   try {
 
     const dbUserData = await User.findOne({
@@ -60,8 +61,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
+/* Route for a logged in user to logout */
 router.post('/logout', (req, res) => {
-  console.log("\n", "\x1b[33m", "Triggered route to logout a User in userRoutes", "\x1b[0m", "\n");
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();

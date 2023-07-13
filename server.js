@@ -2,9 +2,12 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+/* adds express routes for Controllers */
 const routes = require('./controllers');
+/* adds local middleware */
 const helpers = require('./utils/helpers');
 
+/* adds middleware to use .env file */
 require('dotenv').config();
 
 const sequelize = require('./config/connection');
@@ -16,6 +19,7 @@ const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({ helpers });
 
 const sess = {
+  /* session secret is stored in local .env file for extra security */
   secret: process.env.DB_SECRET,
   cookie: {
     maxAge: 60 * 60 * 1000,

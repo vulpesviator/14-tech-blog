@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require("../models");
 
-
+/* Route to display all relevant blog posts on the homepage */
 router.get('/', async (req, res) => {
-
   try {
       const postData = await Post.findAll({
           attributes: ["id", "title", "post_content", "created_at"],
@@ -41,10 +40,9 @@ router.get('/', async (req, res) => {
   };
 });
 
+/* Route to post a comment to a specific blog post */
 router.get("/post/:id", async (req, res) => {
-
   try {
-
     const postData = await Post.findOne({
           where: {
               id: req.params.id,
@@ -90,8 +88,8 @@ router.get("/post/:id", async (req, res) => {
   };
 });
 
+/* Route to login a User */
 router.get('/login', (req, res) => {
-  
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
@@ -101,8 +99,8 @@ router.get('/login', (req, res) => {
   });
 });
 
+/* Route to sign up a new User */
 router.get('/signup', (req, res) => {
-  
   if (req.session.loggedIn) {
     res.redirect('/');
     return;

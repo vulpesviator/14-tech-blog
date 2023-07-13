@@ -1,7 +1,10 @@
 const router = require("express").Router();
+/* imports the Comment model */
 const { Comment } = require("../../models");
+/* local middleware to confirm authorize user is logged in */
 const withAuth = require('../../utils/withauth');
 
+/* If user is logged in, this will post a comment with their id and date */
 router.post('/', withAuth, async (req, res) => {
     try {
         if (req.session) {
