@@ -420,7 +420,7 @@
   }
   
   a {
-    color: #1b89bc;
+    color: #31e1bd;
     text-decoration: none;
   }
   
@@ -1326,6 +1326,10 @@
   .col-12 {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .nav-link {
+    color: #31e1bd;
   }
   
   /* col-sm */
