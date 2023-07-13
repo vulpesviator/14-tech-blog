@@ -4,7 +4,7 @@ const withAuth = require('../../utils/withauth');
 
 
 router.get("/", withAuth, async (req, res) => {
-	console.log("LOOOOOOK HEREREREE");
+
 	try {
     const postData = await Post.findAll({
 		where: {
