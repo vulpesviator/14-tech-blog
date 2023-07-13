@@ -14,15 +14,15 @@ This project creates a CMS-style blog using the MVC architecture utilizing handl
 
 ## Installation
 
-To run this application locally, clone or download the repo which contains the necessary models, js, and handlebars views organized in the MVC structure. You will need to create an .env file for your local repo to contain the database name, user, password, and session secret.
+To run this application locally, clone or download the repo which contains the necessary models, js, and handlebars views organized in the MVC structure. You will need to create an `.env` file for your local repo to contain the database name, user, password, and session secret.
 
 ## Usage
 
 The site is currently deployed for review on [Heroku](https://mvc14-tech-blog-231546f0eef6.herokuapp.com/)
 
-![Tech Blog](./assets/img.gif)
+![Tech Blog](https://github.com/vulpesviator/14-tech-blog/assets/123843930/d5161e3a-80c1-4b78-b215-6c93b98872a6)
 
-1. Begin by logging into your local MySQL environment with `mysql -u root -p`. You will be prompted to enter your password for your MySQL instance.
+1. Log into your local MySQL environment with `mysql -u root -p`. You will be prompted to enter your password for your MySQL instance.
 2. Next locate the schema source for your database by entering `source db/schema.sql` or the path to the schema.sql file in your directory. This should respond with the database being created. If created successfully you can exit the MySQL interface with `exit`
 3. If you want to start with data in the blog, you can run the seeds with `npm run seed`. This will fill in the tables of the database with Users, Comments, and blog Posts.
 4. Then you can start the server by typing `npm run start`.
