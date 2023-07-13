@@ -1,5 +1,6 @@
+<!-- Detailed Post view that shows all comments associated with Post -->
 {{> post-body post}}
-{{!-- this is only rendered if the user is already logged in --}}
+<!-- When User is logged in, they are able to leave new comments -->
 {{#if logged_in}}
     <div class="card">
         <form class="card-body comment-form" id="comment-form">

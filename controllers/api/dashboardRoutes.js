@@ -1,10 +1,11 @@
 const router = require('express').Router();
+/* imports the User, Post, and Comment models */
 const { User, Post, Comment } = require('../../models');
+/* local middleware to confirm authorize user is logged in */
 const withAuth = require('../../utils/withauth');
 
-
+/* Loads all available posts in the database onto the dashboard with their corresponding author, content, and date they were created */
 router.get("/", withAuth, async (req, res) => {
-
 	try {
     const postData = await Post.findAll({
 		where: {
@@ -44,16 +45,16 @@ router.get("/", withAuth, async (req, res) => {
 }
 }); 
 
+/* Route for User to submit a new blog post */
 router.get("/new", withAuth, (req, res) => {
-
 	res.render("new-post", {
 		username: req.session.username,
 		logged_in: req.session.loggedIn,
 	});
 });
 
+/* Route for an authroized User to edit the posts they made */
 router.get("/edit/:id", withAuth, async (req, res) => {
-
 	try {
 		const postData = await Post.findOne({
 		where: {

@@ -1,9 +1,11 @@
 const router = require('express').Router();
+/* imports the Post model */
 const { Post } = require('../../models');
+/* local middleware to confirm authorize user is logged in */
 const withAuth = require('../../utils/withauth');
 
+/* Route for authorized User to create a new post */
 router.post('/new', withAuth, async (req, res) => {
-
     console.log(req.body);
     try {
         const postData = await Post.create({
@@ -19,8 +21,8 @@ router.post('/new', withAuth, async (req, res) => {
         };
 });
 
+/* Route for authorized User to update an existing post */
 router.post('/update/', withAuth, async (req, res) => {
-
     try {
         const postData = await Post.update({
             title: req.body.title,
@@ -42,8 +44,8 @@ router.post('/update/', withAuth, async (req, res) => {
         }
 });
 
+/* Route for authorized User to delete an existing post */
 router.delete('/:id', withAuth, async (req, res) => {
-
     try {
         const postData = await Post.destroy({
             where: {

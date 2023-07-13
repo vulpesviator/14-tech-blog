@@ -1,12 +1,11 @@
+<!-- Creates the Post view for the homepage -->
 <div class="card mt-3">
 	<div class="card-header">
-
 		<h4 class="mt-2"><a href="/post/{{id}}" data-toggle="tooltip" data-bs-animation="true"
 				title="Click to load the post..." class="link-muted text-decoration-none">{{title}}</a></h4>
 	</div>
 	<p class="card-body">{{post_content}}</p>
 	<div class="card-footer text-muted d-flex flex-row justify-content-between">
-
 		<h6 class="card-text">
 			<i class="fa fa-user mr-2"></i>
 			{{user.username}}
